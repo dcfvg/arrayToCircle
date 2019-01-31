@@ -1,21 +1,34 @@
 
 (function() {
 
+  var data = []
+
+
   document.addEventListener('DOMContentLoaded',function() {
       document.querySelector('textarea[name="ice-cream"]').onchange=changeEventHandler;
+      document.querySelector('input[name="slider"]').onchange=updateSlider;
+
   },false);
+
+
+    function updateSlider(event) {
+      var slideAmount = event.target.value;
+      draw(data, event.target.value);
+
+      var sliderDiv = document.getElementById("sliderAmount");
+      sliderDiv.innerHTML = slideAmount;
+    }
 
   function changeEventHandler(event) {
     data = event.target.value;
     data = data.split("\n");
     data = data.map(x => x.split("\t").map(x => parseInt(x, 10)));
-    draw(data);
+    var scaleFactor = 100;
+    draw(data, 100);
   }
 
-  function draw(data) {
+  function draw(data, scaleFactor) {
     console.log(data);
-
-    var scaleFactor = 100;
 
     var height = 1000,
         width = 1000;
@@ -26,7 +39,7 @@
         .attr('height', height)
         .attr('width', width)
       .append('g')
-        .attr('transform', 'translate(30, 30)');
+        .attr('transform', 'translate('+scaleFactor+', '+scaleFactor+')');
 
     var circleRow = svg.selectAll('.row')
         .data(data)
