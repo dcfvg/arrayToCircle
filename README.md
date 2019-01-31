@@ -2,7 +2,8 @@
 
 Ici un outil pour tracer les cercles
 1. copier coller le tableau depuis google sheet (que les chiffres) dans le text area 
-ex. 
+
+exemple : 
 
 ```
 2	4	4	2	2	1	5	1
